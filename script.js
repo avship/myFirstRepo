@@ -1,22 +1,11 @@
-const title = "Проект lesson 2";
-const screens = '("Простые, Сложные, Интерактивные")';
-const screenPrice = 777;
-const rollback = Math.round(Math.random() * 100 + 0.5);
-const fullPrice = 240000;
-const adaptive = true;
+let num = 266219;
 
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
-
-console.log(`Длина переменной screens: ${screens.length}`);
-console.log(
-  `Стоимость верстки экранов (${screenPrice}) рублей/ долларов/гривен/юани`
-);
-console.log(
-  `Стоимость разработки сайта (${fullPrice}) рублей/ долларов/гривен/юани`
-);
-console.log(screens.toLowerCase().split(","));
-console.log(
-  `Процент отката посреднику за работу ${fullPrice * (rollback / 100)}`
-);
+let productDigits = 1;
+while (num !== 0) {
+  const lastDigit = num % 10;
+  //console.log(lastDigit);
+  productDigits *= lastDigit;
+  num = Math.round(num / 10);
+}
+let power3 = productDigits ** 3;
+console.log(String(power3).slice(0, 2));
