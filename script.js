@@ -6,4 +6,4 @@ const fullPrice = 5;
 const adaptive = 6;
 
 alert("Моя первая домашка на курсе Glo Academy Полный Фарш");
-console.log("Какой-то текст в консоли");
+console.log("Задание 1 готово");
