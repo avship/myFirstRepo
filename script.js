@@ -11,17 +11,12 @@ const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 
-const fullPrice = screenPrice + servicePrice1 + servicePrice2;
-
-console.log(servicePercentPrice);
-
 const getAllServicePrices = function () {
-  return arguments.reduce(function (x1, x2) {
+  return Array.from(arguments).reduce(function (x1, x2) {
     return x1 + x2;
   });
 };
 
-const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 function getFullPrice(screenPrice, allServicePrices) {
   return screenPrice * allServicePrices;
 }
@@ -32,17 +27,29 @@ function getTitle(input) {
 function getServicePercentPrices() {
   return Math.ceil(fullPrice - rollback);
 }
-const servicePercentPrice = getServicePercentPrices();
-switch (true) {
-  case fullPrice >= 30000:
-    console.log("Даем скидку в 10%");
-    break;
-  case fullPrice >= 15000:
-    console.log("Даем скидку в 5%");
-    break;
-  case fullPrice >= 0:
-    console.log("Скидка не предусмотрена");
-    break;
-  default:
-    console.log("Что-то пошло не так");
+function showTypeOf(variable) {
+  console.log(typeof variable);
 }
+function getRollbackMessage(tempPrice) {
+  switch (true) {
+    case tempPrice >= 30000:
+      console.log("Даем скидку в 10%");
+      break;
+    case tempPrice >= 15000:
+      console.log("Даем скидку в 5%");
+      break;
+    case tempPrice >= 0:
+      console.log("Скидка не предусмотрена");
+      break;
+    default:
+      console.log("Что-то пошло не так");
+  }
+}
+
+const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+const fullPrice = getFullPrice(screenPrice, allServicePrices);
+const servicePercentPrice = getServicePercentPrices();
+
+console.log(screens.toLowerCase().split(", "));
+getRollbackMessage(fullPrice);
+console.log(servicePercentPrice);
