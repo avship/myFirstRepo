@@ -13,9 +13,26 @@ const servicePrice2 = +prompt("Сколько это будет стоить?");
 
 const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
-const servicePercentPrice = Math.ceil(fullPrice - rollback);
 console.log(servicePercentPrice);
 
+const getAllServicePrices = function () {
+  return arguments.reduce(function (x1, x2) {
+    return x1 + x2;
+  });
+};
+
+const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+function getFullPrice(screenPrice, allServicePrices) {
+  return screenPrice * allServicePrices;
+}
+function getTitle(input) {
+  const newStr = input.trim();
+  return input[0].toUpperCase() + input.substring(1).toLowerCase();
+}
+function getServicePercentPrices() {
+  return Math.ceil(fullPrice - rollback);
+}
+const servicePercentPrice = getServicePercentPrices();
 switch (true) {
   case fullPrice >= 30000:
     console.log("Даем скидку в 10%");
