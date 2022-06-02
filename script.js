@@ -1,3 +1,4 @@
+"use strict";
 //Выбираем значение переменной lang меняем true и false
 const lang = true ? "ru" : "en";
 
