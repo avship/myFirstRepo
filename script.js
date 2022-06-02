@@ -1,22 +1,31 @@
-const title = "Проект lesson 2";
-const screens = '("Простые, Сложные, Интерактивные")';
-const screenPrice = 777;
+"use strict";
+const title = prompt("Как называется ваш проект?");
+const screens = prompt("Какие типы экранов нужно разработать?");
+const screenPrice = +prompt("Сколько будет стоить данная работа?");
 const rollback = Math.round(Math.random() * 100 + 0.5);
-const fullPrice = 240000;
-const adaptive = true;
+//const fullPrice = 240000;
+const adaptive = confirm("Нужен ли адаптив на сайте?");
 
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
+const service1 = prompt("Какой дополнительный тип услуги нужен?");
+const servicePrice1 = prompt("Сколько это будет стоить?");
+const service2 = prompt("Какой дополнительный тип услуги нужен?");
+const servicePrice2 = prompt("Сколько это будет стоить?");
 
-console.log(`Длина переменной screens: ${screens.length}`);
-console.log(
-  `Стоимость верстки экранов (${screenPrice}) рублей/ долларов/гривен/юани`
-);
-console.log(
-  `Стоимость разработки сайта (${fullPrice}) рублей/ долларов/гривен/юани`
-);
-console.log(screens.toLowerCase().split(","));
-console.log(
-  `Процент отката посреднику за работу ${fullPrice * (rollback / 100)}`
-);
+const fullPrice = screenPrice + servicePrice1 + servicePrice2;
+
+const servicePercentPrice = Math.ceil(fullPrice - rollback);
+console.log(servicePercentPrice);
+
+switch (true) {
+  case fullPrice >= 30000:
+    console.log("Даем скидку в 10%");
+    break;
+  case fullPrice >= 15000:
+    console.log("Даем скидку в 5%");
+    break;
+  case fullPrice >= 0:
+    console.log("Скидка не предусмотрена");
+    break;
+  default:
+    console.log("Что-то пошло не так");
+}
