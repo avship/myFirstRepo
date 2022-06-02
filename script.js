@@ -1,55 +1,22 @@
 "use strict";
-const title = prompt("Как называется ваш проект?");
-const screens = prompt("Какие типы экранов нужно разработать?");
-const screenPrice = +prompt("Сколько будет стоить данная работа?");
-const rollback = Math.round(Math.random() * 100 + 0.5);
-//const fullPrice = 240000;
-const adaptive = confirm("Нужен ли адаптив на сайте?");
-
-const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = +prompt("Сколько это будет стоить?");
-const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = +prompt("Сколько это будет стоить?");
-
-const getAllServicePrices = function () {
-  return Array.from(arguments).reduce(function (x1, x2) {
-    return x1 + x2;
-  });
-};
-
-function getFullPrice(screenPrice, allServicePrices) {
-  return screenPrice * allServicePrices;
-}
-function getTitle(input) {
-  const newStr = input.trim();
-  return input[0].toUpperCase() + input.substring(1).toLowerCase();
-}
-function getServicePercentPrices() {
-  return Math.ceil(fullPrice - rollback);
-}
-function showTypeOf(variable) {
-  console.log(typeof variable);
-}
-function getRollbackMessage(tempPrice) {
-  switch (true) {
-    case tempPrice >= 30000:
-      console.log("Даем скидку в 10%");
-      break;
-    case tempPrice >= 15000:
-      console.log("Даем скидку в 5%");
-      break;
-    case tempPrice >= 0:
-      console.log("Скидка не предусмотрена");
-      break;
-    default:
-      console.log("Что-то пошло не так");
+function lesson4HardFunction(str) {
+  if (typeof str !== "string") {
+    console.log("Эта функция должна на вход получать объект типа string");
+    return null;
   }
+  str = str.trim();
+  if (str.length > 30) {
+    str = str.slice(0, 27) + "...";
+  }
+  return str;
 }
 
-const allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
-const fullPrice = getFullPrice(screenPrice, allServicePrices);
-const servicePercentPrice = getServicePercentPrices();
+const checker = lesson4HardFunction(
+  "asssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddhhhhhhhhhhhfldddddd"
+);
+console.log(checker);
+const checker1 = lesson4HardFunction(123);
+console.log(checker1);
 
-console.log(screens.toLowerCase().split(", "));
-getRollbackMessage(fullPrice);
-console.log(servicePercentPrice);
+const checker2 = lesson4HardFunction("Hello world");
+console.log(checker2);
