@@ -23,7 +23,6 @@ switch (lang) {
     break;
   default:
     console.log("Ошибка");
-    break;
 }
 const days = [
   ["Понедельник, вторник, среда, четверг, пятница, суббота, воскресенье"],
