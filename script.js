@@ -7,9 +7,9 @@ const rollback = Math.round(Math.random() * 100 + 0.5);
 const adaptive = confirm("Нужен ли адаптив на сайте?");
 
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = prompt("Сколько это будет стоить?");
+const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = prompt("Сколько это будет стоить?");
+const servicePrice2 = +prompt("Сколько это будет стоить?");
 
 const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
