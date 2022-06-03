@@ -1,22 +1,14 @@
 "use strict";
-function lesson4HardFunction(str) {
-  if (typeof str !== "string") {
-    console.log("Эта функция должна на вход получать объект типа string");
-    return null;
-  }
-  str = str.trim();
-  if (str.length > 30) {
-    str = str.slice(0, 27) + "...";
-  }
-  return str;
-}
 
-const checker = lesson4HardFunction(
-  "asssssddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddhhhhhhhhhhhfldddddd"
-);
-console.log(checker);
-const checker1 = lesson4HardFunction(123);
-console.log(checker1);
+const isNumber = function (num) {
+  num = String(num);
+  return (
+    (num.match(/^\d+(\.\d+)?$/) && !isNaN(parseFloat(num)) && isFinite(num)) ===
+    true
+  );
+};
 
-const checker2 = lesson4HardFunction("Hello world");
-console.log(checker2);
+console.log(isNumber(null));
+console.log(isNumber("      2345         "));
+console.log(isNumber("2345"));
+console.log(isNumber("2345.56"));
