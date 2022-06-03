@@ -11,16 +11,18 @@ arr.forEach((element) => {
 //часть 2 простые числа
 function isPrime(n) {
   let j = 1;
-  for (let divisor = 2; divisor < Math.ceil(n / 2); divisor++) {
+  for (let divisor = 2; divisor < n; divisor++) {
     if (n % divisor === 0) {
       return false;
     }
   }
   return true;
 }
-
+console.log(4, isPrime(4));
+let counter = 1;
 for (let n = 2; n <= 100; n++) {
   if (isPrime(n)) {
-    console.log(`${n} Делители этого числа: 1 и ${n}`);
+    console.log(`${counter} Делители этого числа: 1 и ${n}`);
+    counter++;
   }
 }
