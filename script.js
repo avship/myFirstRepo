@@ -24,7 +24,7 @@ const asking = function () {
   adaptive = confirm("Нужен ли адаптив на сайте?");
 };
 const isNumber = function (testNum) {
-  return String(testNum).match(/^\d+(\.\d+)?$/) === true;
+  return String(testNum).match(/^\d+(\.\d+)?$/);
 };
 const getAllServicePrices = function () {
   let sum = 0;
