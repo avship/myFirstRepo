@@ -53,3 +53,15 @@ const servicePercentPrice = getServicePercentPrices();
 console.log(screens.toLowerCase().split(", "));
 getRollbackMessage(fullPrice);
 console.log(servicePercentPrice);
+
+showTypeOf(title);
+showTypeOf(screens);
+showTypeOf(screenPrice);
+showTypeOf(rollback);
+showTypeOf(adaptive);
+showTypeOf(service1);
+showTypeOf(servicePrice1);
+showTypeOf(service2);
+showTypeOf(servicePrice2);
+
+console.log(screens);
