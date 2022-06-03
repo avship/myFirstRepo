@@ -12,8 +12,8 @@ const service2 = prompt("Какой дополнительный тип услу
 const servicePrice2 = +prompt("Сколько это будет стоить?");
 
 const getAllServicePrices = function () {
-  return Array.from(arguments).reduce(function (x1, x2) {
-    return x1 + x2;
+  return Array.from(arguments).reduce(function (resCalc, newVal) {
+    return resCalc + newVal;
   });
 };
 
