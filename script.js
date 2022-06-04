@@ -10,7 +10,6 @@ arr.forEach((element) => {
 
 //часть 2 простые числа
 function isPrime(n) {
-  let j = 1;
   for (let divisor = 2; divisor < n; divisor++) {
     if (n % divisor === 0) {
       return false;
