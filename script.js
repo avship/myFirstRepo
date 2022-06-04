@@ -81,9 +81,15 @@ const appData = {
     appData.getServicePercentPrices();
     appData.getTitle();
 
+    appData.logger();
     console.log(
       `Стоимость вёрстки экранов ${appData.screenPrice} юани и стоимость разработки сайта ${appData.fullPrice} юани`
     );
+  },
+  logger: function () {
+    for (const key in appData) {
+      if (typeof appData[key] !== "function") console.log(key, appData[key]);
+    }
   },
 };
 
