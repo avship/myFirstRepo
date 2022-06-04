@@ -48,7 +48,7 @@ const showTypeOf = function (variable) {
 };
 const getTitle = function () {
   const newStr = title.trim();
-  title = newStr[0].toUpperCase() + newStr.substring(1).toLowerCase();
+  return newStr[0].toUpperCase() + newStr.substring(1).toLowerCase();
 };
 const getFullPrice = function () {
   return screenPrice + allServicePrices;
@@ -57,6 +57,7 @@ const getServicePercentPrices = function () {
   return fullPrice - fullPrice * (rollback / 100);
 };
 const getRollbackMessage = function () {
+  console.log(fullPrice);
   switch (true) {
     case fullPrice >= 30000:
       console.log("Даем скидку в 10%");
@@ -72,7 +73,8 @@ const getRollbackMessage = function () {
   }
 };
 asking();
-allServicePrices = getAllServicePrices;
+rollback = Math.round(Math.random() * 100 + 0.5);
+allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
 title = getTitle();
@@ -81,12 +83,12 @@ showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
 
-console.log(getRollbackMessage(fullPrice));
+getRollbackMessage();
 console.log(typeof title);
 console.log(typeof screenPrice);
 console.log(typeof adaptive);
 
-console.log(screen.length);
+console.log(screens.length);
 console.log(servicePercentPrice);
 
 console.log(
