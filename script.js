@@ -58,13 +58,13 @@ const getServicePercentPrices = function () {
 };
 const getRollbackMessage = function () {
   switch (true) {
-    case tempPrice >= 30000:
+    case fullPrice >= 30000:
       console.log("Даем скидку в 10%");
       break;
-    case tempPrice >= 15000:
+    case fullPrice >= 15000:
       console.log("Даем скидку в 5%");
       break;
-    case tempPrice >= 0:
+    case fullPrice >= 0:
       console.log("Скидка не предусмотрена");
       break;
     default:
