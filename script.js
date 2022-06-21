@@ -52,9 +52,14 @@ const appData = {
   },
   addPrices: function () {
     //ScreenPrice sum
-    for (const screen of appData.screens) {
-      appData.screenPrice += screen.price;
-    }
+    // for (const screen of appData.screens) {
+    //   appData.screenPrice += screen.price;
+    // }
+    //reduce
+    appData.screenPrice = appData.screens.reduce(
+      (previousValue, currentValue) => previousValue + currentValue.price,
+      0
+    );
   },
   askArrayOfStrings: function () {
     let tempAr = [];
