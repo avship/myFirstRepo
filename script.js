@@ -14,20 +14,30 @@ const appData = {
   fullPrice: 0,
   servicePercentPrice: 0,
 
-  services: [],
-  servicePrice1: 0,
-  servicePrice2: 0,
+  services: {},
+  servicePrice: 0,
 
   asking: function () {
     appData.title = appData.askString(
       "Как называется проект?",
       "Калькулятор вёрстки"
     );
-    appData.screens = appData.askArrayOfStrings(
-      "Какие типы экранов нужно разработать?",
-      "Простые, сложные"
-    );
+    // appData.screens = appData.askArrayOfStrings(
+    //   "Какие типы экранов нужно разработать?",
+    //   "Простые, сложные"
+    // );
+    // appData.screenPrice = appData.askNumber("Сколько будет стоить эта работа?");
+    for (let i = 0; i < 2; i++) {
+      const name = prompt("Какие типы экранов нужно разработать?");
+      const price = appData.askNumber("Сколько будет стоить данная работа?");
+      appData.screens.push({
+        id: i,
+        name: name,
+        price: price,
+      });
+    }
 
+    //Дополнительные услуги
     for (let i = 0; i < 2; i++) {
       const name = prompt("Какой дополнительный тип услуги нужен?");
       let tmpNum = appData.askNumber("Сколько это будет стоить?");
@@ -39,6 +49,12 @@ const appData = {
     }
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+  },
+  addPrices: function () {
+    //ScreenPrice sum
+    for (const screen of appData.screens) {
+      appData.screenPrice += screen.price;
+    }
   },
   askArrayOfStrings: function () {
     let tempAr = [];
@@ -96,7 +112,7 @@ const appData = {
   },
   start: function () {
     appData.asking();
-
+    appData.addPrices();
     appData.getAllServicePrices();
     appData.getFullPrice();
     appData.getServicePercentPrices();
@@ -110,6 +126,7 @@ const appData = {
     // }
     console.log(appData.fullPrice);
     console.log(appData.servicePercentPrice);
+    console.log(appData.screens);
   },
 };
 
