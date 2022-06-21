@@ -28,18 +28,18 @@ const appData = {
     // );
     // appData.screenPrice = appData.askNumber("Сколько будет стоить эта работа?");
     for (let i = 0; i < 2; i++) {
-      const name = prompt("Какие типы экранов нужно разработать?");
+      const name = appData.askString("Какие типы экранов нужно разработать?");
       const price = appData.askNumber("Сколько будет стоить данная работа?");
       appData.screens.push({
         id: i,
         name: name,
-        price: price,
+        price: String(price),
       });
     }
 
     //Дополнительные услуги
     for (let i = 0; i < 2; i++) {
-      const name = prompt("Какой дополнительный тип услуги нужен?");
+      const name = appData.askString("Какой дополнительный тип услуги нужен?");
       let tmpNum = appData.askNumber("Сколько это будет стоить?");
 
       appData.services[`service${i}`] = {
