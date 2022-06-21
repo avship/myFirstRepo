@@ -44,7 +44,7 @@ const appData = {
 
       appData.services[`service${i}`] = {
         name: name,
-        price: tmpNum,
+        price: String(tmpNum),
       };
     }
 
@@ -53,7 +53,7 @@ const appData = {
   addPrices: function () {
     //ScreenPrice sum
     for (const screen of appData.screens) {
-      appData.screenPrice += screen.price;
+      appData.screenPrice += +screen.price;
     }
   },
   askArrayOfStrings: function () {
@@ -81,7 +81,7 @@ const appData = {
   },
   getAllServicePrices: function () {
     for (const key in appData.services) {
-      appData.allServicePrices += appData.services[key]["price"];
+      appData.allServicePrices += +appData.services[key]["price"];
     }
   },
   getTitle: function () {
