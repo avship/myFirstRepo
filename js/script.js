@@ -139,4 +139,20 @@ const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
 
-appData.start();
+//appData.start();
+const frontCalculator = document.getElementsByTagName("h1").length
+  ? document.getElementsByTagName("h1")[0]
+  : null;
+const btns = document.getElementsByClassName("handler_btn");
+const plusElement = document.querySelector(".screen-btn");
+
+const othersPercent = document.querySelectorAll(".other-items.percent");
+const oathersNumber = document.querySelectorAll(".other-items.number");
+
+const inpRange = document.querySelector('.rollback input[type="range"]');
+const spanRangeValue = document.querySelector(
+  '.rollback span[class="range-value"]'
+);
+const inputs = Array.from(document.getElementsByClassName("total-input"));
+let screenElements = document.querySelectorAll(".screen");
+console.log(screenElements);
