@@ -28,23 +28,23 @@ const appData = {
     // );
     // appData.screenPrice = appData.askNumber("Сколько будет стоить эта работа?");
     for (let i = 0; i < 2; i++) {
-      const name = prompt("Какие типы экранов нужно разработать?");
+      const name = appData.askString("Какие типы экранов нужно разработать?");
       const price = appData.askNumber("Сколько будет стоить данная работа?");
       appData.screens.push({
         id: i,
         name: name,
-        price: price,
+        price: String(price),
       });
     }
 
     //Дополнительные услуги
     for (let i = 0; i < 2; i++) {
-      const name = prompt("Какой дополнительный тип услуги нужен?");
+      const name = appData.askString("Какой дополнительный тип услуги нужен?");
       let tmpNum = appData.askNumber("Сколько это будет стоить?");
 
       appData.services[`service${i}`] = {
         name: name,
-        price: tmpNum,
+        price: String(tmpNum),
       };
     }
 
@@ -53,11 +53,10 @@ const appData = {
   addPrices: function () {
     //ScreenPrice sum
     // for (const screen of appData.screens) {
-    //   appData.screenPrice += screen.price;
+    //   appData.screenPrice += +screen.price;
     // }
-    //reduce
     appData.screenPrice = appData.screens.reduce(
-      (previousValue, currentValue) => previousValue + currentValue.price,
+      (previousValue, currentValue) => previousValue + +currentValue.price,
       0
     );
   },
@@ -86,7 +85,7 @@ const appData = {
   },
   getAllServicePrices: function () {
     for (const key in appData.services) {
-      appData.allServicePrices += appData.services[key]["price"];
+      appData.allServicePrices += +appData.services[key]["price"];
     }
   },
   getTitle: function () {
