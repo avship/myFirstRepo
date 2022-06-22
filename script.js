@@ -18,6 +18,7 @@ function sortBooks() {
     }
   });
   for (const curBook of booksSorted) {
+    console.log(curBook);
     mainBook.append(curBook.book);
   }
 }
@@ -54,7 +55,9 @@ function sortElemsWithinBook(tempUl) {
 sortElemsWithinBook(bookUls[1]);
 sortElemsWithinBook(bookUls[4]);
 //в шестой книге добавить главу “Глава 8: За пределами ES6” и поставить её в правильное ме
-const ch8Elem = document.querySelector("li");
-ch8Elem.textContent = "Глава 8: За пределами ES6";
-bookUls[5].append(ch8Elem);
-sortElemsWithinBook(bookUls[5]);
+
+const ch8ElemLis = bookUls[5].querySelectorAll("ul li");
+// //ch8Elem.textContent = "Глава 8: За пределами ES6";
+const ch8liNew = document.createElement("li");
+ch8liNew.textContent = "Глава 8: За пределами ES6";
+ch8ElemLis[ch8ElemLis.length - 1].before(ch8liNew);
