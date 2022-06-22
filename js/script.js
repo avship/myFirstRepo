@@ -1,29 +1,20 @@
 "use strict";
 
-//appData.start();
-const [frontCalculator] = document.getElementsByTagName("h1");
-const [calcBtn, resetBtn] = document.getElementsByClassName("handler_btn");
-const plusElement = document.querySelector(".screen-btn");
+const [title] = document.getElementsByTagName("h1");
+const [startBtn, resetBtn] = document.getElementsByClassName("handler_btn");
+const buttonPlus = document.querySelector(".screen-btn");
 
-const othersPercent = document.querySelectorAll(".other-items.percent");
-const othersNumber = document.querySelectorAll(".other-items.number");
+const otherItemsPercent = document.querySelectorAll(".other-items.percent");
+const otherItemsNumber = document.querySelectorAll(".other-items.number");
 
-const inpRange = document.querySelector('.rollback input[type="range"]');
-const spanRangeValue = document.querySelector(
+const inputRange = document.querySelector('.rollback input[type="range"]');
+const inputRangeValue = document.querySelector(
   '.rollback span[class="range-value"]'
 );
-const [frontPrice, nScreens, nExtraServices, totalPrice, rollbackPrice] =
+const [total, totalCount, totalCountOther, fullTotalCount, totalCountRollback] =
   document.getElementsByClassName("total-input");
 
-let screenElements = document.querySelectorAll(".screen");
-console.log(frontCalculator);
-console.log(calcBtn, resetBtn);
-console.log(plusElement);
-console.log(othersPercent);
-console.log(othersNumber);
-console.log(inpRange);
-console.log(spanRangeValue);
-console.log(frontPrice, nScreens, nExtraServices, totalPrice, rollbackPrice);
+let screens = document.querySelectorAll(".screen");
 
 const isNumber = function (testNum) {
   return String(testNum).match(/^\d+(\.\d+)?$/);
@@ -41,27 +32,42 @@ const appData = {
 
   services: {},
   servicePrice: 0,
+  init: function () {
+    appData.addTitle();
 
-  asking: function () {
-    appData.title = appData.askString(
-      "Как называется проект?",
-      "Калькулятор вёрстки"
-    );
-    // appData.screens = appData.askArrayOfStrings(
-    //   "Какие типы экранов нужно разработать?",
-    //   "Простые, сложные"
-    // );
-    // appData.screenPrice = appData.askNumber("Сколько будет стоить эта работа?");
-    for (let i = 0; i < 2; i++) {
-      const name = prompt("Какие типы экранов нужно разработать?");
-      const price = appData.askNumber("Сколько будет стоить данная работа?");
+    startBtn.addEventListener("click", appData.start);
+    buttonPlus.addEventListener("click", appData.addScreenBlock);
+  },
+  addTitle: function () {
+    document.title = title.textContent;
+  },
+  addScreens: function () {
+    screens.forEach(function (screen, index) {
+      const select = screen.querySelector("select");
+      const input = screen.querySelector("input");
+      const selectName = select.options[select.selectedIndex].textContent;
+
       appData.screens.push({
-        id: i,
-        name: name,
-        price: price,
+        id: index,
+        name: selectName,
+        price: +select.value * +input.value,
       });
-    }
-
+    });
+    console.log(appData.screens);
+  },
+  start: function () {
+    //alert("ok");
+    appData.addScreens();
+    //appData.addScreens();
+    // appData.asking();
+    // appData.addPrices();
+    // appData.getAllServicePrices();
+    // appData.getFullPrice();
+    // appData.getServicePercentPrices();
+    // appData.getTitle();
+    // appData.logger();
+  },
+  asking: function () {
     //Дополнительные услуги
     for (let i = 0; i < 2; i++) {
       const name = prompt("Какой дополнительный тип услуги нужен?");
@@ -72,8 +78,6 @@ const appData = {
         price: tmpNum,
       };
     }
-
-    appData.adaptive = confirm("Нужен ли адаптив на сайте?");
   },
   addPrices: function () {
     //ScreenPrice sum
@@ -140,16 +144,6 @@ const appData = {
         console.log("Что-то пошло не так");
     }
   },
-  start: function () {
-    appData.asking();
-    appData.addPrices();
-    appData.getAllServicePrices();
-    appData.getFullPrice();
-    appData.getServicePercentPrices();
-    appData.getTitle();
-
-    appData.logger();
-  },
   logger: function () {
     // for (const key in appData) {
     //   if (typeof appData[key] !== "function") console.log(key, appData[key]);
@@ -163,3 +157,4 @@ const appData = {
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
+appData.init();
