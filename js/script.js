@@ -1,22 +1,29 @@
 "use strict";
 
 //appData.start();
-const frontCalculator = document.getElementsByTagName("h1")[0];
-const btns = document.getElementsByClassName("handler_btn");
+const [frontCalculator] = document.getElementsByTagName("h1");
+const [calcBtn, resetBtn] = document.getElementsByClassName("handler_btn");
 const plusElement = document.querySelector(".screen-btn");
 
 const othersPercent = document.querySelectorAll(".other-items.percent");
-const oathersNumber = document.querySelectorAll(".other-items.number");
+const othersNumber = document.querySelectorAll(".other-items.number");
 
 const inpRange = document.querySelector('.rollback input[type="range"]');
 const spanRangeValue = document.querySelector(
   '.rollback span[class="range-value"]'
 );
-const [inputCalculate, btnReset] =
+const [frontPrice, nScreens, nExtraServices, totalPrice, rollbackPrice] =
   document.getElementsByClassName("total-input");
 
 let screenElements = document.querySelectorAll(".screen");
-console.log(screenElements);
+console.log(frontCalculator);
+console.log(calcBtn, resetBtn);
+console.log(plusElement);
+console.log(othersPercent);
+console.log(othersNumber);
+console.log(inpRange);
+console.log(spanRangeValue);
+console.log(frontPrice, nScreens, nExtraServices, totalPrice, rollbackPrice);
 
 const isNumber = function (testNum) {
   return String(testNum).match(/^\d+(\.\d+)?$/);
