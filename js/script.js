@@ -32,6 +32,7 @@ const appData = {
   servicesPercent: {},
   servicesNumber: {},
   servicePrice: 0,
+  calcPressed: false,
   init: function () {
     appData.addTitle();
     appData.rangeUpdater();
@@ -42,9 +43,39 @@ const appData = {
   rangeUpdater: function () {
     inputRangeValue.textContent = `${inputRange.value}%`;
     appData.rollback = +inputRange.value;
+    if (appData.calcPressed) {
+      appData.addPrices();
+      appData.showResult();
+    }
+  },
+  addScreensBlock: function () {
+    const cloneScreen = screens[0].cloneNode(true);
+    cloneScreen.querySelector("input").value = "";
+    cloneScreen.querySelector("select").selectedIndex = 0;
+    screens[screens.length - 1].after(cloneScreen);
   },
   addTitle: function () {
     document.title = title.textContent;
+  },
+  screensDataChecker: function () {
+    screens = document.querySelectorAll(".screen");
+    let flag = false;
+    screens.forEach(function (screen, index) {
+      const select = screen.querySelector("select");
+      const input = screen.querySelector("input");
+      const selectName = select.options[select.selectedIndex].textContent;
+      if (input.value === "" || select.selectedIndex === 0) {
+        flag = true;
+      }
+    });
+
+    if (flag) {
+      alert(
+        "Не заполнены информация об экранах или в поле количество экранов введены не цифры"
+      );
+      return false;
+    }
+    return true;
   },
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
@@ -81,44 +112,14 @@ const appData = {
         appData.servicesNumber[label.textContent] = +input.value;
       }
     });
-    console.log(appData.servicesNumber);
-    console.log(appData.servicesPercent);
-  },
-  addScreensBlock: function () {
-    const cloneScreen = screens[0].cloneNode(true);
-    screens[screens.length - 1].after(cloneScreen);
-  },
-  start: function () {
-    screens = document.querySelectorAll(".screen");
-    screens.forEach(function (screen, index) {
-      const select = screen.querySelector("select");
-      const input = screen.querySelector("input");
-      const selectName = select.options[select.selectedIndex].textContent;
-      if (input.value === "" || select.selectedIndex === 0) {
-        alert("Не указана информация про экраны");
-        return;
-      }
-    });
-
-    appData.count = 0;
-    appData.addScreens();
-    appData.addServices();
-    appData.addPrices();
-    appData.showResult();
-  },
-  showResult: function () {
-    total.value = appData.screenPrice;
-    totalCountOther.value =
-      appData.servicePricesPercent + appData.servicePricesNumber;
-
-    fullTotalCount.value = appData.fullPrice;
-    totalCount.value = appData.count;
   },
   addPrices: function () {
     appData.screenPrice = appData.screens.reduce(
       (previousValue, currentValue) => previousValue + +currentValue.price,
       0
     );
+    appData.servicePricesNumber = 0;
+    appData.servicePricesPercent = 0;
     for (const key in appData.servicesNumber) {
       appData.servicePricesNumber += +appData.servicesNumber[key];
     }
@@ -135,33 +136,25 @@ const appData = {
       appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
     totalCountRollback.value = appData.servicePercentPrice;
   },
-  askArrayOfStrings: function () {
-    let tempAr = [];
-    for (let i = 0; i < 2; i++) {
-      const name = appData.askString("Какие типы экранов нужно разработать?");
-      const price = appData.askNumber("Сколько будет стоить работа?", 3000);
-      tempAr.push({ id: i, name: name, price: price });
-    }
-    return tempAr;
-  },
+  showResult: function () {
+    total.value = appData.screenPrice;
+    totalCountOther.value =
+      appData.servicePricesPercent + appData.servicePricesNumber;
 
-  getAllServicePrices: function () {
-    for (const key in appData.services) {
-      appData.allServicePrices += appData.services[key]["price"];
-    }
+    fullTotalCount.value = appData.fullPrice;
+    totalCount.value = appData.count;
   },
-
-  logger: function () {
-    // for (const key in appData) {
-    //   if (typeof appData[key] !== "function") console.log(key, appData[key]);
-    // }
-    console.log(appData.fullPrice);
-    console.log(appData.servicePercentPrice);
-    console.log(appData.screens);
+  start: function () {
+    if (!appData.screensDataChecker()) {
+      return;
+    }
+    appData.count = 0;
+    appData.addScreens();
+    appData.addServices();
+    appData.addPrices();
+    appData.showResult();
+    appData.calcPressed = true;
   },
 };
 
-const showTypeOf = function (variable) {
-  console.log(variable, typeof variable);
-};
 appData.init();
