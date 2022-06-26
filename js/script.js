@@ -49,6 +49,7 @@ const appData = {
     }
   },
   addScreensBlock: function () {
+    screens = document.querySelectorAll(".screen");
     const cloneScreen = screens[0].cloneNode(true);
     cloneScreen.querySelector("input").value = "";
     cloneScreen.querySelector("select").selectedIndex = 0;
@@ -134,7 +135,7 @@ const appData = {
 
     appData.servicePercentPrice =
       appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-    totalCountRollback.value = appData.servicePercentPrice;
+    totalCountRollback.value = Math.floor(appData.servicePercentPrice + 0.5);
   },
   showResult: function () {
     total.value = appData.screenPrice;
