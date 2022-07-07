@@ -126,7 +126,7 @@ const appData = {
       const input = item.querySelector("input[type=text]");
 
       if (check.checked) {
-        appData.servicesPercent[label.textContent] = +input.value;
+        this.servicesPercent[label.textContent] = +input.value;
       }
     });
 
@@ -136,7 +136,7 @@ const appData = {
       const input = item.querySelector("input[type=text]");
 
       if (check.checked) {
-        appData.servicesNumber[label.textContent] = +input.value;
+        this.servicesNumber[label.textContent] = +input.value;
       }
     });
   },
@@ -147,7 +147,7 @@ const appData = {
     );
     this.servicePricesNumber = 0;
     this.servicePricesPercent = 0;
-    for (const key in appData.servicesNumber) {
+    for (const key in this.servicesNumber) {
       this.servicePricesNumber += +this.servicesNumber[key];
     }
     for (const key in this.servicesPercent) {
