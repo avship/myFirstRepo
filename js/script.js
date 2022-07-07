@@ -16,6 +16,13 @@ const [total, totalCount, totalCountOther, fullTotalCount, totalCountRollback] =
 
 let screens = document.querySelectorAll(".screen");
 
+const cmsOpen = document.querySelector("#cms-open");
+const hiddenCmsVariants = document.querySelector(".hidden-cms-variants");
+const cmsSelect = document.querySelector("#cms-select");
+const cmsMainControlInput = hiddenCmsVariants.querySelector(
+  ".main-controls__input"
+);
+
 const appData = {
   title: "",
   screens: [],
@@ -36,18 +43,35 @@ const appData = {
   init: function () {
     this.addTitle();
     this.rangeUpdater();
-    startBtn.addEventListener("click", this.start);
-    buttonPlus.addEventListener("click", this.addScreensBlock);
-    inputRange.addEventListener("input", this.rangeUpdater);
-    resetBtn.addEventListener("click", this.reset);
+    startBtn.addEventListener("click", () => {
+      this.start.bind(appData);
+      this.start();
+    });
+    buttonPlus.addEventListener("click", (item) => {
+      this.addScreensBlock.bind(appData);
+      this.addScreensBlock();
+    });
+    inputRange.addEventListener("input", (item) => {
+      this.rangeUpdater.bind(appData);
+      this.rangeUpdater();
+    });
+    resetBtn.addEventListener("click", (item) => {
+      this.reset.bind(appData);
+      this.reset();
+    });
+
+    cmsOpen.addEventListener("click", (item) => {
+      this.toggleCmsVariants.bind(appData);
+      this.toggleCmsVariants();
+    });
   },
   rangeUpdater: function () {
     //console.log("rangeUpdater", this);
     inputRangeValue.textContent = `${inputRange.value}%`;
-    appData.rollback = +inputRange.value;
-    if (appData.calcPressed) {
-      appData.addPrices();
-      appData.showResult();
+    this.rollback = +inputRange.value;
+    if (this.calcPressed) {
+      this.addPrices();
+      this.showResult();
     }
   },
   addScreensBlock: function () {
@@ -155,6 +179,8 @@ const appData = {
     });
     startBtn.style.display = "none";
     resetBtn.style.display = "block";
+
+    buttonPlus.setAttribute("disabled", "true");
   },
   reset: function () {
     startBtn.style.display = "block";
@@ -168,6 +194,7 @@ const appData = {
     screens[0].querySelector("input").value = "";
     screens[0].querySelector("select").removeAttribute("disabled");
     screens[0].querySelector("select").value = "";
+
     total.value = "0";
     totalCount.value = "0";
     totalCountOther.value = "0";
@@ -180,20 +207,41 @@ const appData = {
     otherItemsNumber.forEach((item) => {
       item.querySelector("input").checked = false;
     });
-    appData.servicesPercent = {};
-    appData.servicesNumber = {};
+
+    this.screens = [];
+    this.screenPrice = 0;
+    this.adaptive = false;
+    this.count = 0;
+
+    this.rollback = 0;
+    this.servicePricesPercent = 0;
+    this.servicePricesNumber = 0;
+    this.fullPrice = 0;
+    this.servicePercentPrice = 0;
+
+    this.servicesPercent = {};
+    this.servicesNumber = {};
+    this.servicePrice = 0;
+    this.calcPressed = false;
+  },
+  toggleCmsVariants: function () {
+    if (cmsOpen.checked) {
+      hiddenCmsVariants.style.display = "flex";
+    } else {
+      hiddenCmsVariants.style.display = "none";
+    }
   },
   start: function () {
-    if (!appData.screensDataChecker()) {
+    if (!this.screensDataChecker()) {
       return;
     }
-    appData.count = 0;
-    appData.addScreens();
-    appData.addServices();
-    appData.addPrices();
-    appData.showResult();
-    appData.calcPressed = true;
-    appData.block();
+    this.count = 0;
+    this.addScreens();
+    this.addServices();
+    this.addPrices();
+    this.showResult();
+    this.calcPressed = true;
+    this.block();
   },
 };
 
