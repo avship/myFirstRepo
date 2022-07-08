@@ -44,25 +44,20 @@ const appData = {
     this.addTitle();
     this.rangeUpdater();
     startBtn.addEventListener("click", () => {
-      this.start.bind(appData);
-      this.start();
+      this.start.call(this);
     });
     buttonPlus.addEventListener("click", (item) => {
-      this.addScreensBlock.bind(appData);
-      this.addScreensBlock();
+      this.addScreensBlock.call(this);
     });
     inputRange.addEventListener("input", (item) => {
-      this.rangeUpdater.bind(appData);
-      this.rangeUpdater();
+      this.rangeUpdater.call(this);
     });
     resetBtn.addEventListener("click", (item) => {
-      this.reset.bind(appData);
-      this.reset();
+      this.reset.call(this);
     });
 
     cmsOpen.addEventListener("click", (item) => {
-      this.toggleCmsVariants.bind(appData);
-      this.toggleCmsVariants();
+      this.toggleCmsVariants.call(this);
     });
   },
   rangeUpdater: function () {
@@ -120,6 +115,8 @@ const appData = {
     });
   },
   addServices: function () {
+    console.log(this);
+
     otherItemsPercent.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
       const label = item.querySelector("label");
@@ -130,7 +127,7 @@ const appData = {
       }
     });
 
-    otherItemsNumber.forEach(function (item) {
+    otherItemsNumber.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
       const label = item.querySelector("label");
       const input = item.querySelector("input[type=text]");
@@ -194,6 +191,7 @@ const appData = {
     screens[0].querySelector("input").value = "";
     screens[0].querySelector("select").removeAttribute("disabled");
     screens[0].querySelector("select").value = "";
+    buttonPlus.removeAttribute("disabled");
 
     total.value = "0";
     totalCount.value = "0";
@@ -232,6 +230,7 @@ const appData = {
     }
   },
   start: function () {
+    console.log(this);
     if (!this.screensDataChecker()) {
       return;
     }
