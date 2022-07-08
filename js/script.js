@@ -174,6 +174,14 @@ const appData = {
       tempSelect.setAttribute("disabled", "true");
       tempInput.setAttribute("disabled", "true");
     });
+    otherItemsPercent.forEach((item) => {
+      const tempInput = item.querySelector("input");
+      tempInput.setAttribute("disabled", "true");
+    });
+    otherItemsNumber.forEach((item) => {
+      const tempInput = item.querySelector("input");
+      tempInput.setAttribute("disabled", "true");
+    });
     startBtn.style.display = "none";
     resetBtn.style.display = "block";
 
@@ -205,13 +213,20 @@ const appData = {
     otherItemsNumber.forEach((item) => {
       item.querySelector("input").checked = false;
     });
-
+    otherItemsPercent.forEach((item) => {
+      const tempInput = item.querySelector("input");
+      tempInput.removeAttribute("disabled");
+    });
+    otherItemsNumber.forEach((item) => {
+      const tempInput = item.querySelector("input");
+      tempInput.removeAttribute("disabled");
+    });
     this.screens = [];
     this.screenPrice = 0;
     this.adaptive = false;
     this.count = 0;
 
-    this.rollback = 0;
+    this.rollback = +inputRange.value;
     this.servicePricesPercent = 0;
     this.servicePricesNumber = 0;
     this.fullPrice = 0;
